@@ -1,6 +1,6 @@
 #En este modulo se almacenan todas las rutas del proyecto
 
-from flask import request, render_template, redirect
+from flask import request, render_template, redirect, flash
 from flask.views import MethodView #Este modulo importa la logica de la clase MethodView
 from src.db import mysql
 
@@ -21,12 +21,15 @@ class IndexController(MethodView): #Heredo de methodview
         value = request.form['value']
         category = request.form['category']
 
-        print(category)
 
         #Guardo los datos del formulario en la base de datos - tabla products
         with mysql.cursor() as cur: #creo un alias a la sentencia mysql.cursor()
-            cur.execute("INSERT INTO products VALUES(%s, %s, %s, %s, %s)", (code, name, stock, value, category)) #Inserto los valores del formulario a la tabla de la base de datos
-            cur.connection.commit() #Ejecucion de la sentencia 
+            try:
+                cur.execute("INSERT INTO products VALUES(%s, %s, %s, %s, %s)", (code, name, stock, value, category)) #Inserto los valores del formulario a la tabla de la base de datos
+                cur.connection.commit() #Ejecucion de la sentencia
+                flash('El producto ha sido agregado correctamente', 'success')
+            except:
+                flash('Un error ha ocurrido','error')
             return redirect('/') #Retorno a la pagina principal - Index
 
 

@@ -4,6 +4,10 @@ from flask import Flask
 from src.routes.routes import * #importamos las rutas del modulo routes
 
 app = Flask(__name__)
+#Llave secreta - llave clave de la aplicacion para llevarla a produccion
+app.config.from_mapping( 
+    SECRET_KEY='development' #codigo 'development'
+)
 
 #Rutas de la aplicacion
 app.add_url_rule(routes["index_route"], view_func=routes["index_controller"])
