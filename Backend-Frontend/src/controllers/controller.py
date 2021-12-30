@@ -27,18 +27,22 @@ class IndexController(MethodView): #Heredo de methodview
             try:
                 cur.execute("INSERT INTO products VALUES(%s, %s, %s, %s, %s)", (code, name, stock, value, category)) #Inserto los valores del formulario a la tabla de la base de datos
                 cur.connection.commit() #Ejecucion de la sentencia
-                flash('El producto ha sido agregado correctamente', 'success')
+                flash("El producto ha sido agregado correctamente", "success")
             except:
-                flash('Un error ha ocurrido','error')
+                flash("Un error ha ocurrido","error")
             return redirect('/') #Retorno a la pagina principal - Index
 
 
 class DeleteProductController(MethodView):
     def post(self, code):
         with mysql.cursor() as cur:
-            cur.execute("DELETE FROM products WHERE code = %s", (code, ))
-            cur.connection.commit() #Ejecucion de la sentencia 
-            return redirect('/') #Retorno a la pagina principal - Index
+            try:
+                cur.execute("DELETE FROM products WHERE code = %s", (code, ))
+                cur.connection.commit()  # Ejecucion de la sentencia
+                flash("El producto ha sido eliminado correctamente", "success")
+            except:
+                flash("Un error ha ocurrido", "error")
+            return redirect('/')  # Retorno a la pagina principal - Index
 
     
 class UpdateProductController(MethodView):
@@ -46,7 +50,6 @@ class UpdateProductController(MethodView):
         with mysql.cursor() as cur:
             cur.execute("SELECT * FROM products WHERE code = %s", (code, ))
             product = cur.fetchone()#Recibe el primer dato que encuentre de acuerdo a la condicion sql
-            print(product)
             return render_template('public/update.html', product = product)
 
     def post(self, code):
@@ -56,9 +59,13 @@ class UpdateProductController(MethodView):
         value = request.form['value']
 
         with mysql.cursor() as cur:
-            cur.execute("UPDATE products SET code = %s, name = %s, stock = %s, value = %s WHERE code = %s", (productCode, name, stock, value, code))
-            cur.connection.commit()
-        return f"Editing product {code} works!"
+            try:
+                cur.execute("UPDATE products SET code = %s, name = %s, stock = %s, value = %s WHERE code = %s", (productCode, name, stock, value, code))
+                cur.connection.commit()
+                flash("El producto ha sido actualizado correctamente", "success")
+            except:
+                flash("Un error ha ocurrido", "error")
+            return redirect('/')
 
 class CreateCategoriesController(MethodView):
     def get(self):
@@ -70,7 +77,11 @@ class CreateCategoriesController(MethodView):
         description = request.form['description']
 
         with mysql.cursor() as cur:
-            cur.execute("INSERT INTO categories VALUES(%s, %s, %s)", (id, name, description))
-            cur.connection.commit()
-        return "Success!"
+            try:    
+                cur.execute("INSERT INTO categories VALUES(%s, %s, %s)", (id, name, description))
+                cur.connection.commit()
+                flash("La categoria se ha creado!", "success")
+            except:
+                flash("Un error ha ocurrido", "error")
+            return redirect('/') 
 
