@@ -1,7 +1,7 @@
 # GESTOR DE PRODUCTOS Y CATEGORÍAS
 Este proyecto se desarrollo mediante el lenguaje de programación Python, el Framework web Flask, MySQL para la base de datos y por ultimo para el FrontEnd se utilizo el Framework Bootstrap.
 
-####EJECUCIÓN
+#### EJECUCIÓN
 1 Paso
  Activamos el ambiente virtual con el siguiente comando: 
  
@@ -12,7 +12,7 @@ Con el siguiente comando ejecutamos el proyecto:
 
 		python .\main.py
 
-####VISTA PREVIA
+#### VISTA PREVIA
 Home de la aplicación 
 ![](https://scontent.fbog4-1.fna.fbcdn.net/v/t39.30808-6/270945552_4148341155265603_3710924589044288106_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=0debeb&_nc_ohc=Jg--o0FIzxEAX91G3W5&tn=yZdgI1KkOyoL7SZ_&_nc_ht=scontent.fbog4-1.fna&oh=00_AT9gkdo3OMmEcA_sVanG-vCn7bRdpJm2R0tCy7WZEaWp1w&oe=61D473BB)
 
@@ -25,7 +25,7 @@ Crear categoría
 Editar producto
 ![](https://scontent.fbog4-1.fna.fbcdn.net/v/t39.30808-6/270538719_4148341171932268_6060472020403012426_n.jpg?_nc_cat=103&ccb=1-5&_nc_sid=0debeb&_nc_ohc=p_J5iSmw1bAAX856qV-&_nc_ht=scontent.fbog4-1.fna&oh=00_AT_WotpF2QFSNo-XLqpiATTIkHLSYdMBWuygaScHAVbCFQ&oe=61D45DE6)
 
-####Contribución
+#### Contribución
 
    1. Crea un Fork del repositorio
    2. Clona en tu maquina mediante git clone https://github.com/DanielCamachoFonseca/Flask-app-demo.git
